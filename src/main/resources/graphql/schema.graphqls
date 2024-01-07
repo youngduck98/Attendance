@@ -1,0 +1,22 @@
+type Query{
+    findAttendanceByDateAndUser(userUid:ID!, date:String!): Attendance
+}
+
+type Mutation{
+    postTodayStartLog(userUid:ID!, time:String!): Result
+    updateTodayEndLog(userUid:ID!, time:String!): Result
+    updateDateUrl(userUid:ID!, date:String!, url:String!): Result
+}
+
+interface Result{
+    result: Boolean!
+    reason: String
+}
+
+type Attendance implements Result{
+    result: Boolean!
+    reason: String
+    startTime: String
+    endTime: String
+    url: String
+}
