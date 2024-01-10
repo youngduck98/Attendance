@@ -1,10 +1,9 @@
 package com.example.attendance.entity;
 
 import com.example.attendance.codegen.types.Attendance;
+import com.example.attendance.codegen.types.Result;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,8 +11,10 @@ import java.time.LocalTime;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "attendance_log")
 @NoArgsConstructor
+@AllArgsConstructor
 public class AttendanceLog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +36,7 @@ public class AttendanceLog {
                 .endTime(this.timeEndWork.toString())
                 .startTime(this.timeStartWork.toString())
                 .url(this.url)
-                .result(true)
+                .valid(new Result(true, ""))
                 .build();
     }
 }

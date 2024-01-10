@@ -1,21 +1,37 @@
 type Query{
-    findAttendanceByDateAndUser(userUid:ID!, date:String!): Attendance
+    findAttendanceByDateAndUser(userUuid:ID!, date:String!): Attendance
+    login(info:LoginInfo): Token
 }
 
 type Mutation{
-    postTodayStartLog(userUid:ID!, time:String!): Result
-    updateTodayEndLog(userUid:ID!, time:String!): Result
-    updateDateUrl(userUid:ID!, date:String!, url:String!): Result
+    postTodayStartLog(userUuid:ID!, time:String!): Result
+    updateTodayEndLog(userUuid:ID!, time:String!): Result
+    updateDateUrl(userUuid:ID!, date:String!, url:String!): Result
+    joinMembership(info:MemberInfo!): Result
 }
 
-interface Result{
+input MemberInfo{
+    id: ID!
+    password: ID!
+}
+
+input LoginInfo{
+    id: ID!
+    password: ID!
+}
+
+type Token{
+    valid: Result
+    contents: ID!
+}
+
+type Result{
     result: Boolean!
     reason: String
 }
 
-type Attendance implements Result{
-    result: Boolean!
-    reason: String
+type Attendance{
+    valid: Result
     startTime: String
     endTime: String
     url: String

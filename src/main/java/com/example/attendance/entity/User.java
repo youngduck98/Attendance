@@ -1,18 +1,18 @@
 package com.example.attendance.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.id.IncrementGenerator;
 
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "user", indexes = {
         @Index(name = "UserUuid", columnList = "userUuid", unique = true)
 })
 @NoArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
